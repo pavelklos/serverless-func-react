@@ -1,4 +1,5 @@
 import Airtable from './Airtable';
+import AirtablePhotos from './AirtablePhotos';
 import Basic from './Basic';
 import GetIP from './GetIP';
 
@@ -9,6 +10,7 @@ function App() {
       <Basic />
       <GetIP />
       <Airtable />
+      <AirtablePhotos />
     </>
   );
 }

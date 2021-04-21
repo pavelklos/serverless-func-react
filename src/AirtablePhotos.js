@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const url = '/api/products';
+const url = '/api/photo-pakistan-2021';
 
-const Airtable = () => {
-  const [products, setProducts] = useState([]);
+const AirtablePhotos = () => {
+  const [photos, setPhotos] = useState([]);
 
   const fetchData = async () => {
     try {
       const response = await axios.get(url);
       const { data } = response;
       // console.log(response);
-      setProducts(data);
+      setPhotos(data);
     } catch (error) {}
   };
 
@@ -24,26 +24,34 @@ const Airtable = () => {
     <>
       <section className='section section-center'>
         <div className='title'>
-          <h2>airtable - products</h2>
+          <h2>airtable - photos</h2>
           <h4>(from own server - netlify serverless function)</h4>
-          <a href='/api/products' target='_blank'>
-            <h5>airtable (PRODUCTS) : API GET [LIST]</h5>
+          <a href='/api/photo-pakistan-2021' target='_blank'>
+            <h5>airtable (PHOTOS) : API GET [LIST]</h5>
           </a>
-          <a href='./api/products?id=recrant2u2MiI2IJy' target='_blank'>
-            <h5>airtable (PRODUCT) : API GET [RETRIEVE]</h5>
+          <a
+            href='./api/photo-pakistan-2021?id=recIn2yA4XTpyUoC9'
+            target='_blank'
+          >
+            <h5>airtable (PHOTO) : API GET [RETRIEVE]</h5>
           </a>
           <div className='title-underline'></div>
         </div>
         <div className='products'>
-          {products.map((product) => {
-            const { id, name, url, price } = product;
+          {photos.map((product) => {
+            const { id, name, url, date, location } = product;
             return (
               // <article className='product' key={id}>
-              <Link to={`/product/${id}`} className='product' key={id}>
+              <Link
+                to={`/photo-pakistan-2021/${id}`}
+                className='product'
+                key={id}
+              >
                 <img src={url} alt={name} />
                 <div className='info'>
                   <h5>{name}</h5>
-                  <h5 className='price'>${price}</h5>
+                  <h5 className='price'>{location}</h5>
+                  <h5>{date}</h5>
                 </div>
               </Link>
               // </article>
@@ -55,7 +63,7 @@ const Airtable = () => {
   );
 };
 
-export default Airtable;
+export default AirtablePhotos;
 
 // id: "recJjarejIgBPdDQk",
 // name: "blue sneakers",
