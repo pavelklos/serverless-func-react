@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
-const url = '/api/photo-pakistan-2021';
+const url = "/api/photo-pakistan-2021";
 
 const AirtablePhotos = () => {
   const [photos, setPhotos] = useState([]);
@@ -27,13 +27,22 @@ const AirtablePhotos = () => {
           <h2>airtable - photos</h2>
           <h4>(from own server - netlify serverless function)</h4>
           <a href='/api/photo-pakistan-2021' target='_blank'>
-            <h5>airtable (PHOTOS) : API GET [LIST]</h5>
+            <h5>airtable (PHOTO) : API GET [LIST]</h5>
           </a>
           <a
             href='./api/photo-pakistan-2021?id=recIn2yA4XTpyUoC9'
             target='_blank'
           >
             <h5>airtable (PHOTO) : API GET [RETRIEVE]</h5>
+          </a>
+          <a href='/api/travel-pakistan-2021' target='_blank'>
+            <h5>airtable (TRAVEL) : API GET [LIST]</h5>
+          </a>
+          <a
+            href='./api/travel-pakistan-2021?id=rec0GbGEd6JwZiKli'
+            target='_blank'
+          >
+            <h5>airtable (TRAVEL) : API GET [RETRIEVE]</h5>
           </a>
           <div className='title-underline'></div>
         </div>

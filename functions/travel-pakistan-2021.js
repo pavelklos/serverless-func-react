@@ -1,13 +1,13 @@
-// domain/.netlify/functions/photo-pakistan-2021?id=recIn2yA4XTpyUoC9
-// domain/.netlify/functions/photo-pakistan-2021
-// domain/api/photo-pakistan-2021?id=recIn2yA4XTpyUoC9
-// domain/api/photo-pakistan-2021
+// domain/.netlify/functions/travel-pakistan-2021?id=rec0GbGEd6JwZiKli
+// domain/.netlify/functions/travel-pakistan-2021
+// domain/api/travel-pakistan-2021?id=rec0GbGEd6JwZiKli
+// domain/api/travel-pakistan-2021
 
 // [Airtable [req] : workspace, base, table]
 // [Airtable [res] : records, and fields]
 // - process.env.AIRTABLE_API_KEY // [.env] ROOT
 // - workspace: SERVERLESS
-// - base: PHOTO
+// - base: TRAVEL
 // - table: Pakistan 2021
 
 // [PHOTO] Pakistan 2021
@@ -18,7 +18,7 @@
 require("dotenv").config();
 const Airtable = require("airtable-node");
 
-const base = "appDlkHYMFCXKevIv";
+const base = "appv2oResQa7hxFNW";
 const table = "Pakistan 2021";
 
 const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
