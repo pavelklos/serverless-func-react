@@ -79,7 +79,7 @@ exports.handler = async (event, context, cb) => {
 
 const getPhoto = (record) => {
   const { id, createdTime } = record;
-  const { location, Photo, Created, Name } = record.fields;
+  const { location, Photo, Created, Name, order } = record.fields;
   const { url, filename, size, type, thumbnails } = Photo[0];
   return {
     base,
@@ -94,5 +94,6 @@ const getPhoto = (record) => {
     size,
     type,
     thumbnails,
+    order,
   };
 };
