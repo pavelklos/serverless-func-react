@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 // const url = "/api/photo-pakistan-2021";
-const url = '/api/pakistan-2021';
+const url = "/api/pakistan-2021";
 
 const AirtablePhotos = () => {
   const [photos, setPhotos] = useState([]);
@@ -54,6 +54,11 @@ const AirtablePhotos = () => {
             target='_blank'
           >
             <h5>airtable (BY BASE, ID) : API GET [RETRIEVE]</h5>
+          </a>
+
+          <br />
+          <a href='/api/indonesia-2014' target='_blank'>
+            <h5>airtable (INDONESIA 2014) : API GET [LIST]</h5>
           </a>
 
           <div className='title-underline'></div>

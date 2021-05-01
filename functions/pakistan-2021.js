@@ -17,13 +17,13 @@
 // [TRAVEL] Pakistan 2021
 // https://api.airtable.com/v0/appv2oResQa7hxFNW/Pakistan%202021?api_key=AIRTABLE_API_KEY
 
-require('dotenv').config();
-const Airtable = require('airtable-node');
+require("dotenv").config();
+const Airtable = require("airtable-node");
 
-const base_photo = 'appDlkHYMFCXKevIv'; // base: PHOTO
-const base_travel = 'appv2oResQa7hxFNW'; // base: TRAVEL
+const base_photo = "appDlkHYMFCXKevIv"; // base: PHOTO
+const base_travel = "appv2oResQa7hxFNW"; // base: TRAVEL
 const all_bases = [base_photo, base_travel]; // all bases
-const table = 'Pakistan 2021';
+const table = "Pakistan 2021";
 
 exports.handler = async (event, context, cb) => {
   const { queryStringParameters } = event;
@@ -46,22 +46,22 @@ exports.handler = async (event, context, cb) => {
 
       if (record.error) {
         return {
-          headers: { 'Access-Control-Allow-Origin': '*' },
+          headers: { "Access-Control-Allow-Origin": "*" },
           statusCode: 404,
           body: `No photo with base: ${base}, id: ${id}`,
         };
       }
       return {
-        headers: { 'Access-Control-Allow-Origin': '*' },
+        headers: { "Access-Control-Allow-Origin": "*" },
         statusCode: 200,
         // body: JSON.stringify(record),
         body: JSON.stringify(getPhotoBasic(record, base, table)),
       };
     } catch (error) {
       return {
-        headers: { 'Access-Control-Allow-Origin': '*' },
+        headers: { "Access-Control-Allow-Origin": "*" },
         statusCode: 500,
-        body: 'Server Error',
+        body: "Server Error",
       };
     }
   }
@@ -71,7 +71,7 @@ exports.handler = async (event, context, cb) => {
   const photos_base_travel = await getPhotosFromAirtable(base_travel, table);
   const photos = photos_base_photo.concat(photos_base_travel);
   return {
-    headers: { 'Access-Control-Allow-Origin': '*' },
+    headers: { "Access-Control-Allow-Origin": "*" },
     statusCode: 200,
     body: JSON.stringify(photos),
   };
@@ -162,7 +162,7 @@ const getPhotosFromAirtable = async (base, table) => {
     const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
       .base(base)
       .table(table);
-    const { records } = await airtable.list();
+    const { records } = await airtable.list({ maxRecords: 1200 });
     const photos = records.map((record) => {
       return getPhotoBasic(record, base, table);
     });
