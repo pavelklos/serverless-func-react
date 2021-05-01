@@ -7,13 +7,15 @@ const Photo = () => {
   const [photo, setPhoto] = useState(null);
 
   const data = useParams();
-  const { photoID } = data;
+  // const { photoID } = data;
+  const { photoBASE, photoID } = data;
   // console.log('useParams()', data);
 
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `/api/photo-pakistan-2021?id=${photoID}`
+        // `/api/photo-pakistan-2021?id=${photoID}`
+        `/api/pakistan-2021?base=${photoBASE}&id=${photoID}`
       );
       const { data } = response;
       // console.log(response);
@@ -37,7 +39,8 @@ const Photo = () => {
   // const { fields } = product;
   // const { name, desc, price, image } = fields;
   // const { url } = image[0];
-  const { id, name, url, date, location } = photo;
+  // const { id, name, url, date, location } = photo;
+  const { id, name, url_3000: url, date, location } = photo;
 
   return (
     <section className='section section-center'>

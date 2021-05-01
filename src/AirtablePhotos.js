@@ -61,11 +61,12 @@ const AirtablePhotos = () => {
         <div className='products'>
           {photos.map((product) => {
             // const { id, name, url, date, location } = product;
-            const { id, name, url_512: url, date, location } = product;
+            const { base, id, name, url_512: url, date, location } = product;
             return (
               // <article className='product' key={id}>
               <Link
-                to={`/photo-pakistan-2021/${id}`}
+                // to={`/photo-pakistan-2021/${id}`}
+                to={`/photo-pakistan-2021/${base}/${id}`}
                 className='product'
                 key={id}
               >

@@ -15,7 +15,11 @@ ReactDOM.render(
       {/* <Route path='/:productID' component={Product} /> */}
       <Route path='/product/:productID' component={Product} />
       {/* <Route path='/:photoID' component={Photo} /> */}
-      <Route path='/photo-pakistan-2021/:photoID' component={Photo} />
+      {/* <Route path='/photo-pakistan-2021/:photoID' component={Photo} /> */}
+      <Route
+        path='/photo-pakistan-2021/:photoBASE/:photoID'
+        component={Photo}
+      />
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
