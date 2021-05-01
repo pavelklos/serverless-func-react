@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-const url = "/api/photo-pakistan-2021";
+// const url = "/api/photo-pakistan-2021";
+const url = '/api/pakistan-2021';
 
 const AirtablePhotos = () => {
   const [photos, setPhotos] = useState([]);
@@ -44,11 +45,23 @@ const AirtablePhotos = () => {
           >
             <h5>airtable (TRAVEL) : API GET [RETRIEVE]</h5>
           </a>
+
+          <a href='/api/pakistan-2021' target='_blank'>
+            <h5>airtable (ALL BASES) : API GET [LIST]</h5>
+          </a>
+          <a
+            href='./api/pakistan-2021?base=appv2oResQa7hxFNW&id=rec0GbGEd6JwZiKli'
+            target='_blank'
+          >
+            <h5>airtable (BY BASE, ID) : API GET [RETRIEVE]</h5>
+          </a>
+
           <div className='title-underline'></div>
         </div>
         <div className='products'>
           {photos.map((product) => {
-            const { id, name, url, date, location } = product;
+            // const { id, name, url, date, location } = product;
+            const { id, name, url_512: url, date, location } = product;
             return (
               // <article className='product' key={id}>
               <Link
