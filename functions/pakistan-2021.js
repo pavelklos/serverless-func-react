@@ -5,6 +5,8 @@
 // [TRAVEL]domain/api/pakistan-2021?base=appv2oResQa7hxFNW&id=rec0GbGEd6JwZiKli
 // [ALL] domain/api/pakistan-2021
 
+// [LIGHTBOX] domain/api/pakistan-2021?type=lightbox
+
 // [Airtable [req] : workspace, base, table]
 // [Airtable [res] : records, and fields]
 // - process.env.AIRTABLE_API_KEY // [.env] ROOT
@@ -27,8 +29,9 @@ const table = "Pakistan 2021";
 
 exports.handler = async (event, context, cb) => {
   const { queryStringParameters } = event;
-  const { base, id } = event.queryStringParameters;
+  const { base, id, type } = event.queryStringParameters;
   const { path } = event;
+  const lightbox = type && type === "lightbox";
   console.log({
     path,
     queryStringParameters,
@@ -67,8 +70,16 @@ exports.handler = async (event, context, cb) => {
   }
 
   // Get All Records from All Bases
-  const photos_base_photo = await getPhotosFromAirtable(base_photo, table);
-  const photos_base_travel = await getPhotosFromAirtable(base_travel, table);
+  const photos_base_photo = await getPhotosFromAirtable(
+    base_photo,
+    table,
+    lightbox
+  );
+  const photos_base_travel = await getPhotosFromAirtable(
+    base_travel,
+    table,
+    lightbox
+  );
   const photos = photos_base_photo.concat(photos_base_travel);
   return {
     headers: { "Access-Control-Allow-Origin": "*" },
@@ -157,13 +168,50 @@ const getPhotoBasic = (record, base, table) => {
   //   url_large = props?.thumbnails?.large?.url;
 };
 
-const getPhotosFromAirtable = async (base, table) => {
+const getPhotoLightbox = (record, base, table) => {
+  const { id, createdTime } = record;
+  const { location, Photo, Created, Name, order } = record.fields;
+  const { url, filename, size, type, thumbnails } = Photo[0];
+  const url_36 = thumbnails.small.url; // height = max 36
+  const url_512 = thumbnails.large.url; // width or height = max 512
+  const url_3000 = thumbnails.full.url; // width or height = max 3000
+
+  return {
+    // base,
+    // table,
+    // id,
+    name: Name,
+    location,
+    date: Created,
+    order,
+    // createdTime,
+    // size,
+    // type,
+    // url,
+    url_512,
+    url_3000,
+    // filename,
+  };
+
+  //   const { id, name, location, date, url, size, createdTime, order, type } = props;
+  //   const add = thumbnails?.large?.url
+
+  // const { id, name, location, date, url, size, createdTime, order } = props;
+  // let url_large = `https://via.placeholder.com/3000x3000.png`;
+  // if (props?.thumbnails?.large?.url) {
+  //   url_large = props?.thumbnails?.large?.url;
+};
+
+const getPhotosFromAirtable = async (base, table, lightbox = false) => {
   try {
     const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
       .base(base)
       .table(table);
     const { records } = await airtable.list({ maxRecords: 1200 });
     const photos = records.map((record) => {
+      if (lightbox) {
+        return getPhotoLightbox(record, base, table);
+      }
       return getPhotoBasic(record, base, table);
     });
     return photos;

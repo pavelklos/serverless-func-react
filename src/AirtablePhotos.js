@@ -57,8 +57,11 @@ const AirtablePhotos = () => {
           </a>
 
           <br />
+          <a href='/api/pakistan-2021?type=lightbox' target='_blank'>
+            <h5>airtable (PAKISTAN 2021) LIGHTBOX : API GET [LIST]</h5>
+          </a>
           <a href='/api/indonesia-2014' target='_blank'>
-            <h5>airtable (INDONESIA 2014) : API GET [LIST]</h5>
+            <h5>airtable (INDONESIA 2014) LIGHTBOX : API GET [LIST]</h5>
           </a>
 
           <div className='title-underline'></div>
